@@ -1,0 +1,18 @@
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_DATABASE=delivery
+    volumes:
+      - $PWD/mysql:/var/lib/mysql
+  php:
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - $PWD/html:/var/www/html
+    working_dir: /var/www/html
+    command: php -S 0.0.0.0:8080
